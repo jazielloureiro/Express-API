@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import postRepository from '../repositories/postRepository';
 import Post from '../entities/post';
+import postService from '../services/postService';
 
 const postController = {
     addPost: (req: Request, res: Response) => {
@@ -15,12 +15,10 @@ const postController = {
         post.title = title;
         post.content = content;
 
-        postRepository
-            .save(post)
+        postService
+            .addPost(post)
             .then(() => res.status(201).send())
-            .catch(() =>
-                res.status(500).send({ error: 'An unexpected error occurred' })
-            );
+            .catch((error) => res.status(500).send({ error }));
     }
 };
 
