@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import Post from './entities/post';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -10,7 +11,7 @@ const dataSource = new DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
-    entities: [],
+    entities: [Post],
     synchronize: true,
     logging: false
 });
