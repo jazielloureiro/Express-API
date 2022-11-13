@@ -1,13 +1,13 @@
 import 'reflect-metadata';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dataSource from './dataSource';
+import router from './router';
 
 const app = express();
 const port = process.env.APP_PORT;
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, world!');
-});
+app.use(express.json());
+app.use(router);
 
 dataSource
     .initialize()
