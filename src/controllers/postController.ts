@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Post from '../entities/post';
 import postService from '../services/postService';
+import postRepository from '../repositories/postRepository';
 
 const postController = {
     getPosts: (req: Request, res: Response) => {
@@ -27,9 +28,7 @@ const postController = {
             return;
         }
 
-        const post = new Post();
-        post.title = title;
-        post.content = content;
+        const post = postRepository.create(req.body as Post);
 
         postService
             .addPost(post)
@@ -46,10 +45,7 @@ const postController = {
             return;
         }
 
-        const post = new Post();
-        post.id = id;
-        post.title = title;
-        post.content = content;
+        const post = postRepository.create({ ...req.body, id } as Post);
 
         postService
             .updatePost(post)
