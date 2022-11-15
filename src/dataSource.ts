@@ -1,9 +1,6 @@
 import { DataSource } from 'typeorm';
 import Post from './entities/post';
 import User from './entities/user';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const dataSource = new DataSource({
     type: 'postgres',

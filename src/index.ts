@@ -1,5 +1,9 @@
 import 'reflect-metadata';
+import dotenv from 'dotenv';
 import express from 'express';
+
+dotenv.config();
+
 import dataSource from './dataSource';
 import router from './router';
 
