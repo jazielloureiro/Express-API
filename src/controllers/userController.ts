@@ -5,26 +5,12 @@ import userRepository from '../repositories/userRepository';
 
 const userController = {
     addUser(req: Request, res: Response) {
-        const { username, password } = req.body;
-
-        if (!username || !password) {
-            res.status(400).send({ error: 'Invalid body' });
-            return;
-        }
-
         const user = userRepository.create(req.body as User);
 
         userService.addUser(user).then(() => res.status(201).send());
     },
 
     login(req: Request, res: Response) {
-        const { username, password } = req.body;
-
-        if (!username || !password) {
-            res.status(400).send({ error: 'Invalid body' });
-            return;
-        }
-
         const user = userRepository.create(req.body as User);
 
         userService

@@ -5,7 +5,8 @@ import {
     decodeJWT,
     isAdmin,
     errorMiddleware,
-    validatePost
+    validatePost,
+    validateUser
 } from './middlewares';
 
 const router = Router();
@@ -22,8 +23,8 @@ router.put(
 );
 router.delete('/posts/:id', decodeJWT, isAdmin, postController.deletePost);
 
-router.post('/users', userController.addUser);
-router.post('/users/login', userController.login);
+router.post('/users', validateUser, userController.addUser);
+router.post('/users/login', validateUser, userController.login);
 
 router.use(errorMiddleware);
 

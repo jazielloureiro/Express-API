@@ -35,3 +35,17 @@ export const validatePost = (
         next();
     }
 };
+
+export const validateUser = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        res.status(400).send({ error: 'Invalid body' });
+    } else {
+        next();
+    }
+};
