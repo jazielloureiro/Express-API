@@ -2,12 +2,11 @@ import { Router } from 'express';
 import postController from './controllers/postController';
 import userController from './controllers/userController';
 import {
-    decodeJWT,
-    isAdmin,
     errorMiddleware,
     validatePost,
     validateUser
-} from './middlewares';
+} from './middlewares/apiMiddlewares';
+import { decodeJWT, isAdmin } from './middlewares/authMiddlewares';
 
 const router = Router();
 
