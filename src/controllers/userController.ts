@@ -4,7 +4,7 @@ import userService from '../services/userService';
 import userRepository from '../repositories/userRepository';
 
 const userController = {
-    addUser: (req: Request, res: Response) => {
+    addUser(req: Request, res: Response) {
         const { username, password } = req.body;
 
         if (!username || !password) {
@@ -14,13 +14,10 @@ const userController = {
 
         const user = userRepository.create(req.body as User);
 
-        userService
-            .addUser(user)
-            .then(() => res.status(201).send())
-            .catch((error) => res.status(500).send());
+        userService.addUser(user).then(() => res.status(201).send());
     },
 
-    login: (req: Request, res: Response) => {
+    login(req: Request, res: Response) {
         const { username, password } = req.body;
 
         if (!username || !password) {

@@ -4,7 +4,7 @@ import User from '../entities/user';
 import userRepository from '../repositories/userRepository';
 
 const userService = {
-    addUser: async (user: User) => {
+    async addUser(user: User) {
         const saltRounds = 10;
 
         user.password = await bcrypt.hash(user.password, saltRounds);
@@ -13,7 +13,7 @@ const userService = {
         await userRepository.save(user);
     },
 
-    login: async (user: User) => {
+    async login(user: User) {
         const savedUser = await userRepository.findOneBy({
             username: user.username
         });
