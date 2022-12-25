@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Request as JWTRequest } from 'express-jwt';
 import Post from '../entities/post';
 import postService from '../services/postService';
 import postRepository from '../repositories/postRepository';
@@ -21,7 +20,7 @@ const postController = {
             .catch((error) => res.status(500).send({ error }));
     },
 
-    addPost: (req: JWTRequest, res: Response) => {
+    addPost: (req: Request, res: Response) => {
         const { title, content } = req.body;
 
         if (!title || !content) {
