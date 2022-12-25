@@ -1,4 +1,4 @@
-import { ErrorRequestHandler, NextFunction, Response } from 'express';
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { expressjwt, Request as JWTRequest } from 'express-jwt';
 
 export const errorMiddleware: ErrorRequestHandler = (err, req, res, next) => {
@@ -19,5 +19,19 @@ export const isAdmin = (req: JWTRequest, res: Response, next: NextFunction) => {
         next();
     } else {
         res.status(403).send({ error: 'Admin access required' });
+    }
+};
+
+export const validatePost = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const { title, content } = req.body;
+
+    if (!title || !content) {
+        res.status(400).send({ error: 'Invalid body' });
+    } else {
+        next();
     }
 };

@@ -21,13 +21,6 @@ const postController = {
     },
 
     addPost: (req: Request, res: Response) => {
-        const { title, content } = req.body;
-
-        if (!title || !content) {
-            res.status(400).send({ error: 'Invalid body' });
-            return;
-        }
-
         const post = postRepository.create(req.body as Post);
 
         postService
@@ -38,12 +31,6 @@ const postController = {
 
     updatePost: (req: Request, res: Response) => {
         const id = Number(req.params.id);
-        const { title, content } = req.body;
-
-        if (!title || !content) {
-            res.status(400).send({ error: 'Invalid body' });
-            return;
-        }
 
         const post = postRepository.create({ ...req.body, id } as Post);
 
