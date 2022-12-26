@@ -21,21 +21,15 @@ const userService = {
         if (!savedUser) {
             throw 'Login failed';
         }
-
-        const isMatch = await bcrypt.compare(user.password, savedUser.password);
+        
+        const { id, username, isAdmin, password } = savedUser; 
+        const isMatch = await bcrypt.compare(user.password, password);
 
         if (!isMatch) {
             throw 'Login failed';
         }
-
-        const token = jwt.sign(
-            {
-                id: savedUser.id,
-                username: savedUser.username,
-                isAdmin: savedUser.isAdmin
-            },
-            process.env.SECRET_KEY ?? ''
-        );
+        
+        const token = jwt.sign({ id, username, isAdmin }, process.env.SECRET_KEY ?? '');
 
         return token;
     }
