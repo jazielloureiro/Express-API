@@ -1,6 +1,10 @@
 import { DataSource } from 'typeorm';
+import dotenv from 'dotenv';
 import Post from './entities/post';
 import User from './entities/user';
+import { Setup1672232849551 } from './migrations/1672232849551-Setup';
+
+dotenv.config();
 
 const dataSource = new DataSource({
     type: 'postgres',
@@ -10,7 +14,7 @@ const dataSource = new DataSource({
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     entities: [Post, User],
-    synchronize: true,
+    migrations: [Setup1672232849551],
     logging: false
 });
 
