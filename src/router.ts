@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger.json';
 import postController from './controllers/postController';
 import userController from './controllers/userController';
 import {
@@ -9,6 +11,8 @@ import {
 import { decodeJWT, isAdmin } from './middlewares/authMiddlewares';
 
 const router = Router();
+
+router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 router.get('/posts', postController.getPosts);
 router.get('/posts/:id', postController.getPost);
