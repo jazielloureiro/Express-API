@@ -15,6 +15,7 @@ const dataSource = new DataSource({
     database: process.env.DATABASE,
     entities: [Post, User],
     migrations: [Setup1672232849551],
+    migrationsRun: true,
     logging: false
 });
 
