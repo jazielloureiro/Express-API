@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx tsc",
-    "dev": "npx nodemon --exec npx ts-node src/index.ts",
+    "dev": "npx nodemon --exec node -r ts-node/register --inspect=0.0.0.0:9229 -nolazy src/index.ts",
     "start": "node dist/index.js",
     "prepare": "husky install"
   },
