@@ -1,13 +1,26 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn
+} from 'typeorm';
+import User from './user';
 
 @Entity()
 export default class Post {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length: 64 })
-    title: string;
-
-    @Column({ length: 4096 })
+    @Column({ length: 256 })
     content: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @ManyToOne((type) => User)
+    user: User;
+
+    @ManyToOne((type) => Post)
+    post: Post;
 }

@@ -8,7 +8,6 @@ const userService = {
         const saltRounds = 10;
 
         user.password = await bcrypt.hash(user.password, saltRounds);
-        user.isAdmin = false;
 
         await userRepository.save(user);
     },
@@ -31,8 +30,7 @@ const userService = {
         const token = jwt.sign(
             {
                 id: savedUser.id,
-                username: savedUser.username,
-                isAdmin: savedUser.isAdmin
+                username: savedUser.username
             },
             process.env.SECRET_KEY ?? ''
         );

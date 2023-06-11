@@ -10,7 +10,4 @@ export default class User {
 
     @Column({ length: 128 })
     password: string;
-
-    @Column()
-    isAdmin: boolean;
 }

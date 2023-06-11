@@ -1,8 +1,5 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
-import Post from './entities/post';
-import User from './entities/user';
-import { Setup1672232849551 } from './migrations/1672232849551-Setup';
 
 dotenv.config();
 
@@ -13,8 +10,8 @@ const dataSource = new DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [Post, User],
-    migrations: [Setup1672232849551],
+    entities: ['src/entities/*.ts'],
+    migrations: ['src/migrations/*.ts'],
     migrationsRun: true,
     logging: false
 });
