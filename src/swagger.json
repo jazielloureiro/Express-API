@@ -1,10 +1,15 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Blog API",
-    "description": "Sample express API",
+    "title": "Express API",
+    "description": "A microblogging platform API",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
   "paths": {
     "/posts": {
       "get": {
@@ -12,21 +17,15 @@
           "Posts"
         ],
         "summary": "Get all posts.",
+        "description": "",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "posts": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Post"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/posts"
                 }
               }
             }
@@ -34,37 +33,39 @@
         }
       },
       "post": {
-        "security": [
-          {
-            "jwtAuth": []
-          }
-        ],
         "tags": [
           "Posts"
         ],
         "summary": "Create a post.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Post"
-              }
-            }
-          }
-        },
+        "description": "",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Created"
           },
           "400": {
-            "description": "Invalid body."
+            "description": "Invalid body"
           },
           "401": {
             "description": "Invalid JWT token"
           },
           "403": {
-            "description": "Admin access required."
+            "description": "Admin access required"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/post"
+              }
+            }
           }
         }
       }
@@ -74,19 +75,20 @@
         "tags": [
           "Posts"
         ],
+        "summary": "Get a post by Id.",
+        "description": "",
         "parameters": [
           {
             "$ref": "#/components/parameters/id"
           }
         ],
-        "summary": "Get a post by Id.",
         "responses": {
           "200": {
             "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Post"
+                  "$ref": "#/components/schemas/post"
                 }
               }
             }
@@ -97,39 +99,40 @@
         "tags": [
           "Posts"
         ],
-        "security": [
-          {
-            "jwtAuth": []
-          }
-        ],
+        "summary": "Update a post by id.",
+        "description": "",
         "parameters": [
           {
             "$ref": "#/components/parameters/id"
           }
         ],
-        "summary": "Update a Post by Id.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Post"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Ok"
           },
           "400": {
-            "description": "Invalid body."
+            "description": "Invalid body"
           },
           "401": {
             "description": "Invalid JWT token"
           },
           "403": {
-            "description": "Admin access required."
+            "description": "Admin access required"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/post"
+              }
+            }
           }
         }
       },
@@ -137,31 +140,29 @@
         "tags": [
           "Posts"
         ],
-        "security": [
-          {
-            "jwtAuth": []
-          }
-        ],
+        "summary": "Delete a post by id.",
+        "description": "",
         "parameters": [
           {
             "$ref": "#/components/parameters/id"
           }
         ],
-        "summary": "Delete a Post by Id.",
         "responses": {
           "200": {
             "description": "Ok"
-          },
-          "400": {
-            "description": "Invalid body."
           },
           "401": {
             "description": "Invalid JWT token"
           },
           "403": {
-            "description": "Admin access required."
+            "description": "Admin access required"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtAuth": []
+          }
+        ]
       }
     },
     "/users": {
@@ -170,22 +171,24 @@
           "Users"
         ],
         "summary": "Create an user.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
+        "description": "",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Created"
           },
           "400": {
-            "description": "Invalid body."
+            "description": "Invalid body"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
           }
         }
       }
@@ -196,34 +199,31 @@
           "Users"
         ],
         "summary": "Get authorization token.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
+        "description": "",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/jwtToken"
                 }
               }
             }
           },
           "400": {
-            "description": "Invalid body."
+            "description": "Invalid body"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
           }
         }
       }
@@ -231,29 +231,46 @@
   },
   "components": {
     "schemas": {
-      "Post": {
+      "post": {
         "type": "object",
         "properties": {
-          "title": {
-            "type": "string"
-          },
           "content": {
-            "type": "string"
+            "type": "string",
+            "example": "Awesome text"
           }
         },
         "required": [
-          "title",
           "content"
         ]
       },
-      "User": {
+      "posts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/post"
+        }
+      },
+      "jwtToken": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJ...w5c"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "user": {
         "type": "object",
         "properties": {
           "username": {
-            "type": "string"
+            "type": "string",
+            "example": "johndoe"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "example": "passwd123"
           }
         },
         "required": [
