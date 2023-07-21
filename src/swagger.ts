@@ -16,9 +16,37 @@ const doc = {
     components: {
         schemas: {
             post: {
-                $content: 'Awesome text'
+                $content: 'Awesome text',
+                $parentPost: 1,
+                $user: 1
             },
-            posts: [{ $ref: '#/components/schemas/post' }],
+            detailedPost: {
+                $id: 1,
+                $createdAt: '2000-00-00T00:00:00.000Z',
+                $content: 'Awesome text',
+                $user: {
+                    $id: 1,
+                    $username: 'johndoe'
+                },
+                $parentPost: {
+                    $id: 1,
+                    $createdAt: '2000-00-00T00:00:00.000Z',
+                    $content: 'Awesome text',
+                    $user: {
+                        $id: 1,
+                        $username: 'johndoe'
+                    }
+                }
+            },
+            posts: [
+                {
+                    $id: 1,
+                    $createdAt: '2000-00-00T00:00:00.000Z',
+                    $content: 'Awesome text',
+                    $user: { $id: 1 },
+                    $parentPost: { $id: 1 }
+                }
+            ],
             jwtToken: {
                 $token: 'eyJ...w5c'
             },

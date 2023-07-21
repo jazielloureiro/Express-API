@@ -14,7 +14,7 @@ const postController = {
             }
         */
 
-        postService.getPosts().then((posts) => res.status(200).send({ posts }));
+        postService.getPosts().then((posts) => res.status(200).send(posts));
     },
 
     getPost(req: Request, res: Response) {
@@ -24,13 +24,13 @@ const postController = {
             #swagger.parameters['$ref'] = ['#/components/parameters/id']
             #swagger.responses[200] = {
                 description: 'Ok',
-                content: { 'application/json': { schema: { $ref: '#/components/schemas/post' } } }
+                content: { 'application/json': { schema: { $ref: '#/components/schemas/detailedPost' } } }
             }
         */
 
         const id = Number(req.params.id);
 
-        postService.getPost(id).then((post) => res.status(200).send({ post }));
+        postService.getPost(id).then((post) => res.status(200).send(post));
     },
 
     addPost(req: Request, res: Response) {

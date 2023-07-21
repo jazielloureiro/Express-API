@@ -88,7 +88,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/post"
+                  "$ref": "#/components/schemas/detailedPost"
                 }
               }
             }
@@ -237,16 +237,152 @@
           "content": {
             "type": "string",
             "example": "Awesome text"
+          },
+          "parentPost": {
+            "type": "number",
+            "example": 1
+          },
+          "user": {
+            "type": "number",
+            "example": 1
           }
         },
         "required": [
-          "content"
+          "content",
+          "parentPost",
+          "user"
+        ]
+      },
+      "detailedPost": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2000-00-00T00:00:00.000Z"
+          },
+          "content": {
+            "type": "string",
+            "example": "Awesome text"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "username": {
+                "type": "string",
+                "example": "johndoe"
+              }
+            },
+            "required": [
+              "id",
+              "username"
+            ]
+          },
+          "parentPost": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2000-00-00T00:00:00.000Z"
+              },
+              "content": {
+                "type": "string",
+                "example": "Awesome text"
+              },
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "johndoe"
+                  }
+                },
+                "required": [
+                  "id",
+                  "username"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "createdAt",
+              "content",
+              "user"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "content",
+          "user",
+          "parentPost"
         ]
       },
       "posts": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/post"
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number",
+              "example": 1
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2000-00-00T00:00:00.000Z"
+            },
+            "content": {
+              "type": "string",
+              "example": "Awesome text"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "parentPost": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "createdAt",
+            "content",
+            "user",
+            "parentPost"
+          ]
         }
       },
       "jwtToken": {
