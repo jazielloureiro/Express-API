@@ -22,5 +22,5 @@ export default class Post {
     user: User;
 
     @ManyToOne((type) => Post)
-    post: Post;
+    parentPost: Post;
 }
