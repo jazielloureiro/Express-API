@@ -66,7 +66,6 @@ const postController = {
             #swagger.responses[200] = { description: 'Ok' }
             #swagger.responses[400] = { description: 'Invalid body' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
-            #swagger.responses[403] = { description: 'Admin access required' }
         */
 
         const id = Number(req.params.id);
@@ -84,7 +83,6 @@ const postController = {
             #swagger.parameters['$ref'] = ['#/components/parameters/id']
             #swagger.responses[200] = { description: 'Ok' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
-            #swagger.responses[403] = { description: 'Admin access required' }
         */
 
         const id = Number(req.params.id);
