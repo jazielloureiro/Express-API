@@ -20,6 +20,9 @@ const doc = {
                 $user: 1,
                 parentPost: 1
             },
+            postContent: {
+                $content: 'Awesome text'
+            },
             detailedPost: {
                 $id: 1,
                 $createdAt: '2000-00-00T00:00:00.000Z',

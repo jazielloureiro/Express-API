@@ -61,7 +61,7 @@ const postController = {
             #swagger.parameters['$ref'] = ['#/components/parameters/id']
             #swagger.requestBody = {
                 required: true,
-                content: { "application/json": { schema: { $ref: "#/components/schemas/post" } } }
+                content: { "application/json": { schema: { $ref: "#/components/schemas/postContent" } } }
             }
             #swagger.responses[200] = { description: 'Ok' }
             #swagger.responses[400] = { description: 'Invalid body' }

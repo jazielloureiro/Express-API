@@ -130,7 +130,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/post"
+                "$ref": "#/components/schemas/postContent"
               }
             }
           }
@@ -250,6 +250,18 @@
         "required": [
           "content",
           "user"
+        ]
+      },
+      "postContent": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "example": "Awesome text"
+          }
+        },
+        "required": [
+          "content"
         ]
       },
       "detailedPost": {
