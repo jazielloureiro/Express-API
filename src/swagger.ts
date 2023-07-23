@@ -17,8 +17,8 @@ const doc = {
         schemas: {
             post: {
                 $content: 'Awesome text',
-                $parentPost: 1,
-                $user: 1
+                $user: 1,
+                parentPost: 1
             },
             detailedPost: {
                 $id: 1,
@@ -28,7 +28,7 @@ const doc = {
                     $id: 1,
                     $username: 'johndoe'
                 },
-                $parentPost: {
+                parentPost: {
                     $id: 1,
                     $createdAt: '2000-00-00T00:00:00.000Z',
                     $content: 'Awesome text',
@@ -44,7 +44,7 @@ const doc = {
                     $createdAt: '2000-00-00T00:00:00.000Z',
                     $content: 'Awesome text',
                     $user: { $id: 1 },
-                    $parentPost: { $id: 1 }
+                    parentPost: { $id: 1 }
                 }
             ],
             jwtToken: {

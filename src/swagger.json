@@ -238,18 +238,17 @@
             "type": "string",
             "example": "Awesome text"
           },
-          "parentPost": {
+          "user": {
             "type": "number",
             "example": 1
           },
-          "user": {
+          "parentPost": {
             "type": "number",
             "example": 1
           }
         },
         "required": [
           "content",
-          "parentPost",
           "user"
         ]
       },
@@ -330,8 +329,7 @@
           "id",
           "createdAt",
           "content",
-          "user",
-          "parentPost"
+          "user"
         ]
       },
       "posts": {
@@ -380,8 +378,7 @@
             "id",
             "createdAt",
             "content",
-            "user",
-            "parentPost"
+            "user"
           ]
         }
       },
