@@ -18,9 +18,9 @@ export default class Post {
     @CreateDateColumn()
     createdAt: Date;
 
-    @ManyToOne((type) => User, { onDelete: 'CASCADE' })
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     user: User;
 
-    @ManyToOne((type) => Post, { onDelete: 'CASCADE' })
+    @ManyToOne(() => Post, { onDelete: 'CASCADE' })
     parentPost: Post;
 }
