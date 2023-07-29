@@ -1,17 +1,15 @@
 import request from 'supertest';
-import express from 'express';
 import dataSource from '../src/dataSource';
-import router from '../src/router';
 import postRepository from '../src/repositories/postRepository';
 import userRepository from '../src/repositories/userRepository';
-
-const app = express();
-
-app.use(express.json());
-app.use(router);
-
-const postData = { content: 'Awesome text' };
-const userData = { username: 'john', password: '123' };
+import {
+    app,
+    getJwtToken,
+    postData,
+    postData2,
+    savePost,
+    userData
+} from './utils';
 
 beforeAll(async () => {
     await dataSource.initialize();
@@ -28,22 +26,35 @@ afterAll(async () => {
 
 describe('E2E tests', () => {
     it('POST /posts', async () => {
-        await request(app).post('/users').send(userData);
-
-        const loginResponse = await request(app)
-            .post('/users/login')
-            .send(userData);
-
-        const response = await request(app)
-            .post('/posts')
-            .auth(loginResponse.body.token, { type: 'bearer' })
-            .send(postData);
+        const jwtToken = await getJwtToken(userData);
+        const response = await savePost(jwtToken, postData);
 
         const posts = await postRepository.find();
 
         expect(response.statusCode).toBe(201);
         expect(posts.length).toBe(1);
         expect(posts[0].content).toBe(postData.content);
+    });
+
+    it('PUT /posts', async () => {
+        const jwtToken = await getJwtToken(userData);
+        await savePost(jwtToken, postData);
+
+        let posts = await postRepository.find();
+
+        console.log(posts);
+
+        const response = await request(app)
+            .put(`/posts/${posts[0].id}`)
+            .auth(jwtToken, { type: 'bearer' })
+            .send(postData2);
+
+        console.log(response);
+
+        posts = await postRepository.find();
+
+        expect(response.statusCode).toBe(200);
+        expect(posts[0].content).toBe(postData2.content);
     });
 
     it('POST /users', async () => {
