@@ -10,4 +10,4 @@ RUN npm install
 
 COPY . .
 
-CMD [ "npx", "ts-node", "test/index.test.ts" ]
+CMD [ "npm", "test" ]
