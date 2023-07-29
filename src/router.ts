@@ -17,7 +17,7 @@ router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 router.get('/posts', postController.getPosts);
 router.get('/posts/:id', postController.getPost);
 router.post('/posts', decodeJWT, validatePost, postController.addPost);
-router.put('/posts/:id', decodeJWT, postController.updatePost);
+router.put('/posts/:id', decodeJWT, validatePost, postController.updatePost);
 router.delete('/posts/:id', decodeJWT, postController.deletePost);
 
 router.post('/users', validateUser, userController.addUser);
