@@ -1,8 +1,11 @@
+name: express-api-test
+
 services:
   express:
     container_name: express
     build:
       context: ./
+      dockerfile: Dockerfile.test
     env_file:
       - ./.env
     ports:
@@ -23,18 +26,8 @@ services:
     ports:
       - 5432:${DB_PORT}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: always
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4:latest
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
-    ports:
-      - 5050:80
+      - postgres_data_test:/var/lib/postgresql/data
     restart: always
 
 volumes:
-  postgres_data:
+  postgres_data_test:
