@@ -3,6 +3,7 @@ import { Request as JwtRequest } from 'express-jwt';
 import Post from '../entities/post';
 import postService from '../services/postService';
 import postRepository from '../repositories/postRepository';
+import userRepository from '../repositories/userRepository';
 
 const postController = {
     getPosts(req: Request, res: Response) {
@@ -49,7 +50,8 @@ const postController = {
             #swagger.responses[403] = { description: 'Admin access required' }
         */
 
-        const user = req.auth?.id;
+        const userId = req.auth?.id;
+        const user = userRepository.create({ id: userId });
 
         const post = postRepository.create({ ...req.body, user } as Post);
 
@@ -72,9 +74,10 @@ const postController = {
             #swagger.responses[422] = { description: 'Unprocessable entity' }
         */
 
-        const id = Number(req.params.id);
-        const user = req.auth?.id;
+        const userId = req.auth?.id;
+        const user = userRepository.create({ id: userId });
 
+        const id = Number(req.params.id);
         const post = postRepository.create({ ...req.body, id, user } as Post);
 
         postService
