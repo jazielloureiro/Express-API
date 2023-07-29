@@ -53,11 +53,14 @@ const postService = {
     },
 
     async updatePost(post: Post) {
-        const savedPost = await postRepository.findOneBy({ id: post.id });
+        const savedPost = await postRepository.findOne({
+            where: { id: post.id },
+            relations: { user: true }
+        });
 
         if (!savedPost) {
             throw "There's no post for the given id";
-        } else if (savedPost.user !== post.user) {
+        } else if (savedPost.user.id !== post.user.id) {
             throw "User can't edit this post";
         }
 
