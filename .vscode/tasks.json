@@ -4,7 +4,7 @@
     {
       "label": "Launch E2E tests",
       "type": "shell",
-      "command": "docker compose -f compose.dev.yaml down && docker compose -f compose.test.yaml run express && docker compose -f compose.test.yaml down",
+      "command": "docker compose -f compose.dev.yaml down && docker compose -f compose.test.yaml run --rm express && docker compose -f compose.test.yaml down",
       "group": "test",
       "presentation": {
         "reveal": "always",
