@@ -53,7 +53,15 @@ const postService = {
     },
 
     async updatePost(post: Post) {
-        await postRepository.update(post.id, post);
+        const savedPost = await postRepository.findOneBy({ id: post.id });
+
+        if (!savedPost) {
+            throw "There's no post for the given id";
+        } else if (savedPost.user !== post.user) {
+            throw "User can't edit this post";
+        }
+
+        await postRepository.update(post.id, { content: post.content });
     },
 
     async deletePost(id: number) {

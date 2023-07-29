@@ -56,7 +56,7 @@ const postController = {
         postService.addPost(post).then(() => res.status(201).send());
     },
 
-    updatePost(req: Request, res: Response) {
+    updatePost(req: JwtRequest, res: Response) {
         /*
             #swagger.tags = ['Posts']
             #swagger.summary = 'Update a post by id.'
@@ -69,13 +69,18 @@ const postController = {
             #swagger.responses[200] = { description: 'Ok' }
             #swagger.responses[400] = { description: 'Invalid body' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
+            #swagger.responses[422] = { description: 'Unprocessable entity' }
         */
 
         const id = Number(req.params.id);
+        const user = req.auth?.id;
 
-        const post = postRepository.create({ ...req.body, id } as Post);
+        const post = postRepository.create({ ...req.body, id, user } as Post);
 
-        postService.updatePost(post).then(() => res.status(200).send());
+        postService
+            .updatePost(post)
+            .then(() => res.status(200).send())
+            .catch((error) => res.status(422).send({ error }));
     },
 
     deletePost(req: Request, res: Response) {
