@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Request as JwtRequest } from 'express-jwt';
 import Post from '../entities/post';
 import postService from '../services/postService';
 import postRepository from '../repositories/postRepository';
@@ -20,7 +21,7 @@ const postController = {
     getPost(req: Request, res: Response) {
         /*
             #swagger.tags = ['Posts']
-            #swagger.summary = 'Get a post by Id.'
+            #swagger.summary = 'Get a post by id.'
             #swagger.parameters['$ref'] = ['#/components/parameters/id']
             #swagger.responses[200] = {
                 description: 'Ok',
@@ -33,7 +34,7 @@ const postController = {
         postService.getPost(id).then((post) => res.status(200).send(post));
     },
 
-    addPost(req: Request, res: Response) {
+    addPost(req: JwtRequest, res: Response) {
         /*
             #swagger.tags = ['Posts']
             #swagger.summary = 'Create a post.'
@@ -48,7 +49,9 @@ const postController = {
             #swagger.responses[403] = { description: 'Admin access required' }
         */
 
-        const post = postRepository.create(req.body as Post);
+        const user = req.auth?.id;
+
+        const post = postRepository.create({ ...req.body, user } as Post);
 
         postService.addPost(post).then(() => res.status(201).send());
     },

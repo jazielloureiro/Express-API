@@ -17,7 +17,6 @@ const doc = {
         schemas: {
             post: {
                 $content: 'Awesome text',
-                $user: 1,
                 parentPost: 1
             },
             postContent: {

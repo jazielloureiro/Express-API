@@ -13,9 +13,9 @@ export const validatePost = (
     res: Response,
     next: NextFunction
 ) => {
-    const { content, user } = req.body;
+    const { content } = req.body;
 
-    if (!content || !user) {
+    if (!content) {
         res.status(400).send({ error: 'Invalid body' });
     } else {
         next();

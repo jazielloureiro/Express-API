@@ -75,7 +75,7 @@
         "tags": [
           "Posts"
         ],
-        "summary": "Get a post by Id.",
+        "summary": "Get a post by id.",
         "description": "",
         "parameters": [
           {
@@ -232,18 +232,13 @@
             "type": "string",
             "example": "Awesome text"
           },
-          "user": {
-            "type": "number",
-            "example": 1
-          },
           "parentPost": {
             "type": "number",
             "example": 1
           }
         },
         "required": [
-          "content",
-          "user"
+          "content"
         ]
       },
       "postContent": {
