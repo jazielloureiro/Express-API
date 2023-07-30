@@ -48,9 +48,6 @@
           },
           "401": {
             "description": "Invalid JWT token"
-          },
-          "403": {
-            "description": "Admin access required"
           }
         },
         "security": [
@@ -107,8 +104,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Ok"
+          "204": {
+            "description": "Success"
           },
           "400": {
             "description": "Invalid body"
@@ -148,8 +145,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Ok"
+          "204": {
+            "description": "Success"
           },
           "401": {
             "description": "Invalid JWT token"

@@ -47,7 +47,6 @@ const postController = {
             #swagger.responses[201] = { description: 'Created' }
             #swagger.responses[400] = { description: 'Invalid body' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
-            #swagger.responses[403] = { description: 'Admin access required' }
         */
 
         const userId = req.auth?.id;
@@ -68,7 +67,7 @@ const postController = {
                 required: true,
                 content: { "application/json": { schema: { $ref: "#/components/schemas/postContent" } } }
             }
-            #swagger.responses[200] = { description: 'Ok' }
+            #swagger.responses[204] = { description: 'Success' }
             #swagger.responses[400] = { description: 'Invalid body' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
             #swagger.responses[422] = { description: 'Unprocessable entity' }
@@ -82,7 +81,7 @@ const postController = {
 
         postService
             .updatePost(post)
-            .then(() => res.status(200).send())
+            .then(() => res.status(204).send())
             .catch((error) => res.status(422).send({ error }));
     },
 
@@ -92,7 +91,7 @@ const postController = {
             #swagger.summary = 'Delete a post by id.'
             #swagger.security = [{ jwtAuth: [] }]
             #swagger.parameters['$ref'] = ['#/components/parameters/id']
-            #swagger.responses[200] = { description: 'Ok' }
+            #swagger.responses[204] = { description: 'Success' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
             #swagger.responses[422] = { description: 'Unprocessable entity' }
         */
@@ -103,7 +102,10 @@ const postController = {
         const id = Number(req.params.id);
         const post = postRepository.create({ id, user });
 
-        postService.deletePost(post).then(() => res.status(200).send());
+        postService
+            .deletePost(post)
+            .then(() => res.status(204).send())
+            .catch((error) => res.status(422).send({ error }));
     }
 };
 
