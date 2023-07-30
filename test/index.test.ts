@@ -49,7 +49,7 @@ describe('E2E tests', () => {
 
         posts = await postRepository.find();
 
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(204);
         expect(posts[0].content).toBe(postData2.content);
     });
 
@@ -65,7 +65,7 @@ describe('E2E tests', () => {
 
         posts = await postRepository.find();
 
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(204);
         expect(posts.length).toBe(0);
     });
 
