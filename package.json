@@ -1,7 +1,7 @@
 {
-  "name": "blog-api",
+  "name": "express-api",
   "version": "1.0.0",
-  "description": "Sample blog HTTP API",
+  "description": "A microblogging platform API",
   "author": "Jaziel",
   "license": "MIT",
   "scripts": {
