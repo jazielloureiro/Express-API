@@ -42,19 +42,31 @@ describe('E2E tests', () => {
 
         let posts = await postRepository.find();
 
-        console.log(posts);
-
         const response = await request(app)
             .put(`/posts/${posts[0].id}`)
             .auth(jwtToken, { type: 'bearer' })
             .send(postData2);
 
-        console.log(response);
-
         posts = await postRepository.find();
 
         expect(response.statusCode).toBe(200);
         expect(posts[0].content).toBe(postData2.content);
+    });
+
+    it('DELETE /posts', async () => {
+        const jwtToken = await getJwtToken(userData);
+        await savePost(jwtToken, postData);
+
+        let posts = await postRepository.find();
+
+        const response = await request(app)
+            .delete(`/posts/${posts[0].id}`)
+            .auth(jwtToken, { type: 'bearer' });
+
+        posts = await postRepository.find();
+
+        expect(response.statusCode).toBe(200);
+        expect(posts.length).toBe(0);
     });
 
     it('POST /users', async () => {

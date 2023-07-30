@@ -86,7 +86,7 @@ const postController = {
             .catch((error) => res.status(422).send({ error }));
     },
 
-    deletePost(req: Request, res: Response) {
+    deletePost(req: JwtRequest, res: Response) {
         /*
             #swagger.tags = ['Posts']
             #swagger.summary = 'Delete a post by id.'
@@ -94,11 +94,16 @@ const postController = {
             #swagger.parameters['$ref'] = ['#/components/parameters/id']
             #swagger.responses[200] = { description: 'Ok' }
             #swagger.responses[401] = { description: 'Invalid JWT token' }
+            #swagger.responses[422] = { description: 'Unprocessable entity' }
         */
 
-        const id = Number(req.params.id);
+        const userId = req.auth?.id;
+        const user = userRepository.create({ id: userId });
 
-        postService.deletePost(id).then(() => res.status(200).send());
+        const id = Number(req.params.id);
+        const post = postRepository.create({ id, user });
+
+        postService.deletePost(post).then(() => res.status(200).send());
     }
 };
 

@@ -153,6 +153,9 @@
           },
           "401": {
             "description": "Invalid JWT token"
+          },
+          "422": {
+            "description": "Unprocessable entity"
           }
         },
         "security": [
