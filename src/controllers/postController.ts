@@ -28,11 +28,15 @@ const postController = {
                 description: 'Ok',
                 content: { 'application/json': { schema: { $ref: '#/components/schemas/detailedPost' } } }
             }
+            #swagger.responses[404] = { description: 'Post not found' }
         */
 
         const id = Number(req.params.id);
 
-        postService.getPost(id).then((post) => res.status(200).send(post));
+        postService
+            .getPost(id)
+            .then((post) => res.status(200).send(post))
+            .catch((error) => res.status(404).send({ error }));
     },
 
     addPost(req: JwtRequest, res: Response) {

@@ -36,7 +36,21 @@ describe('E2E tests', () => {
         expect(posts[0].content).toBe(postData.content);
     });
 
-    it('PUT /posts', async () => {
+    it('GET /posts/:id', async () => {
+        const jwtToken = await getJwtToken(userData);
+        await savePost(jwtToken, postData);
+
+        const posts = await postRepository.find();
+
+        const response = await request(app)
+            .get(`/posts/${posts[0].id}`)
+            .auth(jwtToken, { type: 'bearer' });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.content).toBe(postData.content);
+    });
+
+    it('PUT /posts/:id', async () => {
         const jwtToken = await getJwtToken(userData);
         await savePost(jwtToken, postData);
 
@@ -53,7 +67,7 @@ describe('E2E tests', () => {
         expect(posts[0].content).toBe(postData2.content);
     });
 
-    it('DELETE /posts', async () => {
+    it('DELETE /posts/:id', async () => {
         const jwtToken = await getJwtToken(userData);
         await savePost(jwtToken, postData);
 

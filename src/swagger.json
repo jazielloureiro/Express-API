@@ -89,6 +89,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Post not found"
           }
         }
       },

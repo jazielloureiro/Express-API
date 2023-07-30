@@ -20,7 +20,7 @@ const postService = {
     },
 
     async getPost(id: number) {
-        return await postRepository.findOne({
+        const post = await postRepository.findOne({
             select: {
                 user: {
                     id: true,
@@ -46,6 +46,12 @@ const postService = {
                 }
             }
         });
+
+        if (!post) {
+            throw "There's no post for the given id";
+        }
+
+        return post;
     },
 
     async addPost(post: Post) {
@@ -55,9 +61,7 @@ const postService = {
     async updatePost(post: Post) {
         const savedPost = await this.getPost(post.id);
 
-        if (!savedPost) {
-            throw "There's no post for the given id";
-        } else if (savedPost.user.id !== post.user.id) {
+        if (savedPost.user.id !== post.user.id) {
             throw "User can't edit this post";
         }
 
@@ -67,9 +71,7 @@ const postService = {
     async deletePost(post: Post) {
         const savedPost = await this.getPost(post.id);
 
-        if (!savedPost) {
-            throw "There's no post for the given id";
-        } else if (savedPost.user.id !== post.user.id) {
+        if (savedPost.user.id !== post.user.id) {
             throw "User can't delete this post";
         }
 
